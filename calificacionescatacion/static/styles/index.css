@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Importante para evitar desbordamientos */
+}
+ 
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdfcfb;
+    color: #3e2f1c;
+    margin: 0;
+    padding: 2rem;
+  }
+  .imagen-esquina {
+    position: absolute;       /* Posiciona la imagen con coordenadas */
+    top: 20px;                /* Distancia desde arriba */
+    right: 20px;              /* Distancia desde la derecha */
+    width: 200px;             /* Tamaño de la imagen */
+    z-index: 1000;            /* Asegura que esté encima de otros elementos */
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #603813;
+  }
+  span.badge {
+    font-size: 0.9rem;
+  }
+  
+  form {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #fff6ee;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .section.datos-generales {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    width: 30%;
+  }
+  
+  table.ficha {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+.seccion-acidez {
+  background-color: #d4ee3c7b; 
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-nuez {
+  background-color: #daf7357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-frutas {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-fruta-marron {
+  background-color: #f7ea357b; 
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-vegetal {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-floral {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-madera {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-especias {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.seccion-saboresatipicos {
+  background-color: #f7ea357b;  
+  font-weight: bold;
+  color: #3b0a00;
+}
+
+.detalle-acidez td {
+  background-color: lab(87.87% -40.35 74.83 / 0.482); /* fondo más claro para los detalles */
+}
+
+.detalle-acidez input[type="range"]::-webkit-slider-thumb {
+  background: #e67e22;  /* color naranja para el pulgar del slider */
+}
+  table.ficha th, table.ficha td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  .detalle-amargor td {
+  background-color: #a0328395; /* fondo más claro para los detalles */
+}
+ .detalle-astrigencia td {
+  background-color: #5732a095; /* fondo más claro para los detalles */
+}
+ 
+.detalle-cacao td {
+  background-color: #7137008c; /* fondo más claro para los detalles */
+}
+
+.detalle-dulce td {
+  background-color: #ffc0dc; /* fondo más claro para los detalles */
+}
+
+.detalle-nuez td {
+  background-color: #773f1a3f; /* fondo más claro para los detalles */
+}
+
+.detalle-frutas td {
+  background-color: #ffe1003f; /* fondo más claro para los detalles */
+}
+.detalle-fruta-marron td {
+  background-color: hsla(36, 100%, 50%, 0.318); /* fondo más claro para los detalles */
+}
+
+.detalle-vegetal td {
+  background-color: #78946c; /* fondo más claro para los detalles */  
+}
+.detalle-floral td {
+  background-color: #00ffbb7f   ; /* fondo más claro para los detalles #4b7337  #88a95b  #78946c */
+}
+
+.detalle-madera td{
+  background-color: #88a95b;
+}
+
+.detalle-especias td{
+  background-color: #d0373793;
+}
+
+.detalle-saboresatipicos td{
+  background-color: rgba(128, 128, 128, 0.652);
+}
+
+
+  table.ficha input[type="range"] {
+    width: 100%;
+  }
+  
+  table.ficha input[type="text"],
+  table.ficha input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 0.3rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+  }
+  
+  .puntuacion {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .puntuacion label {
+    font-weight: bold;
+    flex: 1;
+  }
+  
+  button {
+    background-color: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 2rem auto 0;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background-color: #A0522D;
+  }
+  
