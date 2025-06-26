@@ -13,32 +13,37 @@ def admindasboard(request):
         # Consultamos todas las evaluaciones ordenadas por fecha
     evaluaciones = EvaluacionCacao.objects.order_by('fecha')
 
-    # Creamos las listas para los gráficos
-    fechas = [2]
-    acidez = [9]
+    # ejemplo con varios atributos
+    fechas = [1]
+    acidez = [2]
+    acidez_frutal = [4]
     amargor = [4]
-    dulzor = [9]
-    aroma = [2]
-    persistencia = [1]
+    fruta_tropical = [5]
+    humedad = [5]
+    humo = [3]
 
     for e in evaluaciones:
         fechas.append(e.fecha.strftime("%Y-%m-%d"))
         acidez.append(e.acidez)
+        acidez_frutal.append(e.acidez_frutal)
         amargor.append(e.amargor)
-        dulzor.append(e.dulzor)
-        aroma.append(e.aroma)
-        persistencia.append(e.persistencia)
+        fruta_tropical.append(e.fruta_tropical)
+        humedad.append(e.humedad)
+        humo.append(e.humo)
 
     contexto = {
         'fechas': json.dumps(fechas),
         'acidez': json.dumps(acidez),
+        'acidez_frutal': json.dumps(acidez_frutal),
         'amargor': json.dumps(amargor),
-        'dulzor': json.dumps(dulzor),
-        'aroma': json.dumps(aroma),
-        'persistencia': json.dumps(persistencia),
+        'fruta_tropical': json.dumps(fruta_tropical),
+        'humedad': json.dumps(humedad),
+        'humo': json.dumps(humo),
     }
 
     return render(request, 'admindasboard.html', contexto)
+
+   
 
 def formcoex(request):
     template1 = loader.get_template('codexform.html')

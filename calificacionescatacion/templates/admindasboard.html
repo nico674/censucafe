@@ -118,10 +118,16 @@
         </table>
         <h2 style="text-align: center;">Dashboard de Gráficos</h2>
 
-  <div class="grafico-container"><canvas id="lineChart"></canvas></div>
-  <div class="grafico-container"><canvas id="barChart"></canvas></div>
-  <div class="grafico-container"><canvas id="radarChart"></canvas></div>
-  <div class="grafico-container"><canvas id="pieChart"></canvas></div>
+  <div class="grafico-container"><canvas id="lineChart" width="900" height="400"></canvas></div>
+
+  <!-- Gráfico de líneas o barras con todos los atributos -->
+  <canvas id="lineBarChart" width="900" height="400"></canvas>
+
+  <!-- Gráfico radar con los últimos valores de cada atributo -->
+  <canvas id="radarChart" width="600" height="400"></canvas>
+
+  <!-- Gráfico de torta (suma total por categoría para ejemplo) -->
+  <canvas id="pieChart" width="600" height="400"></canvas>
       </div>
 
       <!-- Detalle del estudiante -->
@@ -197,60 +203,78 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
         // Recibimos los datos desde el contexto de Django
-    const fechas = JSON.parse('{{ fechas|default:"[]"|escapejs }}');
-    const acidez = JSON.parse('{{ acidez|default:"[]"|escapejs }}');
-    const amargor = JSON.parse('{{ amargor|default:"[]"|escapejs }}');
-    const dulzor = JSON.parse('{{ dulzor|default:"[]"|escapejs }}');
-    const aroma = JSON.parse('{{ aroma|default:"[]"|escapejs }}');
-    const persistencia = JSON.parse('{{ persistencia|default:"[]"|escapejs }}');
+        const fechas = JSON.parse('{{ fechas|escapejs }}');
+    const atributos = JSON.parse('{{ atributos|escapejs }}');
+    const radarUltimos = JSON.parse('{{ radar_ultimos|escapejs }}');
+    const totalesPorCategoria = JSON.parse('{{ totales_categoria|escapejs }}');
+    const categorias = JSON.parse('{{ nombres_categoria|escapejs }}');
 
-    // Gráfico de líneas (ej. evolución de acidez)
-    new Chart(document.getElementById('lineChart'), {
-      type: 'line',
+    // Gráfico de líneas o barras con todos los atributos
+    const datasets = atributos.map(atrib => {
+      return {
+        label: atrib.nombre,
+        data: atrib.valores,
+        borderColor: atrib.color,
+        backgroundColor: atrib.color,
+        fill: false
+      };
+    });
+
+    new Chart(document.getElementById('lineBarChart'), {
+      type: 'bar', // Cambiar a 'line' si quieres líneas
       data: {
         labels: fechas,
-        datasets: [
-          {
-            label: 'Acidez',
-            data: acidez,
-            borderColor: 'red',
-            fill: false
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Evolución de atributos sensoriales'
           },
-          {
-            label: 'Amargor',
-            data: amargor,
-            borderColor: 'blue',
-            fill: false
-          },
-          {
-            label: 'Dulzor',
-            data: dulzor,
-            borderColor: 'green',
-            fill: false
+          legend: {
+            position: 'top'
           }
-        ]
+        },
+        scales: {
+          x: { stacked: true },
+          y: { stacked: false }
+        }
       }
     });
 
-    // Gráfico radar (promedio de la última evaluación)
+    // Gráfico Radar con los últimos valores
     new Chart(document.getElementById('radarChart'), {
       type: 'radar',
       data: {
-        labels: ['Aroma', 'Acidez', 'Amargor', 'Dulzor', 'Persistencia'],
+        labels: atributos.map(a => a.nombre),
         datasets: [{
-          label: 'Última Evaluación',
-          data: [
-            aroma[aroma.length - 1],
-            acidez[acidez.length - 1],
-            amargor[amargor.length - 1],
-            dulzor[dulzor.length - 1],
-            persistencia[persistencia.length - 1]
-          ],
+          label: 'Evaluación más reciente',
+          data: radarUltimos,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)'
         }]
       }
     });
-  </script>
+
+    // Gráfico de torta con sumatoria por categoría
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: categorias,
+        datasets: [{
+          data: totalesPorCategoria,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
+          ]
+        }]
+      }
+    });  </script>
 </body>
 </html>
