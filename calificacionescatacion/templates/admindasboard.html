@@ -8,7 +8,7 @@
   <title>Dashboard Admin - Test catador</title>
     {% load static %}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+ <!-- <link rel="stylesheet" href="{% static 'styles/index.css' %}" > -->
 </head>
 <body>
 
@@ -71,7 +71,6 @@
   <!-- Contenido principal -->
   <div class="container-fluid mt-4">
     <div class="tab-content" id="dashboardContent">
-
       <!-- Registrar estudiante -->
       <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="registrar-tab">
         <form id="form-registrar">
@@ -196,6 +195,62 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{% static 'script\scritp.js' %}"></script>
+  <script>
+        // Recibimos los datos desde el contexto de Django
+    const fechas = JSON.parse('{{ fechas|default:"[]"|escapejs }}');
+    const acidez = JSON.parse('{{ acidez|default:"[]"|escapejs }}');
+    const amargor = JSON.parse('{{ amargor|default:"[]"|escapejs }}');
+    const dulzor = JSON.parse('{{ dulzor|default:"[]"|escapejs }}');
+    const aroma = JSON.parse('{{ aroma|default:"[]"|escapejs }}');
+    const persistencia = JSON.parse('{{ persistencia|default:"[]"|escapejs }}');
+
+    // Gráfico de líneas (ej. evolución de acidez)
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: fechas,
+        datasets: [
+          {
+            label: 'Acidez',
+            data: acidez,
+            borderColor: 'red',
+            fill: false
+          },
+          {
+            label: 'Amargor',
+            data: amargor,
+            borderColor: 'blue',
+            fill: false
+          },
+          {
+            label: 'Dulzor',
+            data: dulzor,
+            borderColor: 'green',
+            fill: false
+          }
+        ]
+      }
+    });
+
+    // Gráfico radar (promedio de la última evaluación)
+    new Chart(document.getElementById('radarChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Aroma', 'Acidez', 'Amargor', 'Dulzor', 'Persistencia'],
+        datasets: [{
+          label: 'Última Evaluación',
+          data: [
+            aroma[aroma.length - 1],
+            acidez[acidez.length - 1],
+            amargor[amargor.length - 1],
+            dulzor[dulzor.length - 1],
+            persistencia[persistencia.length - 1]
+          ],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)'
+        }]
+      }
+    });
+  </script>
 </body>
 </html>
