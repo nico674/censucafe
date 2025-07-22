@@ -2,9 +2,11 @@ from django.db import models
 
 # Create your models here.
 # models.py
-from django.db import models
+
 
 class EvaluacionCacao(models.Model):
+    muestra = models.CharField(max_length=100,blank=True, null=True)
+    catador = models.CharField(max_length=100,blank=True, null=True)
     fecha = models.DateField(auto_now_add=True)
 
     # ACIDEZ
@@ -87,6 +89,10 @@ class EvaluacionCacao(models.Model):
             self.otro_defecto, 10
         )
         super().save(*args, **kwargs)
-
+    comentarios = models.TextField(blank=True, null=True)
+    catador_score = models.FloatField(blank=True, null=True)
+    puntaje_final = models.FloatField(blank=True, null=True)
+    
     def __str__(self):
-        return f"Evaluación {self.fecha}"
+        return f"{self.catador}, {self.muestra} ({self.fecha})"
+

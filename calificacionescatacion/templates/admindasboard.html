@@ -76,15 +76,15 @@
         <form id="form-registrar">
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="nombre" class="form-label">Nombre</label>
+              <label for="nombre" class="form-label">Fecha</label>
               <input type="text" class="form-control" id="nombre" required>
             </div>
             <div class="col-md-6">
-              <label for="apellido" class="form-label">Apellido</label>
+              <label for="apellido" class="form-label">Tipo de Cacao</label>
               <input type="text" class="form-control" id="apellido" required>
             </div>
             <div class="col-md-4">
-              <label for="documento" class="form-label">Documento</label>
+              <label for="documento" class="form-label">Origen</label>
               <input type="text" class="form-control" id="documento" required>
             </div>
             <div class="col-md-4">
@@ -96,29 +96,16 @@
               <input type="email" class="form-control" id="email" required>
             </div>
           </div>
-          <button class="btn btn-success mt-3" type="submit">Registrar</button>
+          <button class="btn btn-success mt-3" type="submit">Aplicar Filtros</button>
         </form>
       </div>
 
       <!-- Lista de estudiantes -->
       <div class="tab-pane fade" id="lista" role="tabpanel" aria-labelledby="lista-tab">
-        <table class="table table-striped mt-3">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Código</th>
-              <th>Email</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Aquí se llenan los datos dinámicamente -->
-          </tbody>
-        </table>
+
         <h2 style="text-align: center;">Dashboard de Gráficos</h2>
 
-  <div class="grafico-container"><canvas id="lineChart" width="900" height="400"></canvas></div>
+  <div class="grafico-container" width="900" height="400"><canvas id="lineChart" width="900" height="400"></canvas></div>
 
   <!-- Gráfico de líneas o barras con todos los atributos -->
   <canvas id="lineBarChart" width="900" height="400"></canvas>
@@ -128,6 +115,22 @@
 
   <!-- Gráfico de torta (suma total por categoría para ejemplo) -->
   <canvas id="pieChart" width="600" height="400"></canvas>
+      
+        <table class="table table-striped mt-3">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>variedad</th>
+              <th>Origen</th>
+              <th>Codigo</th>
+              <th>Notas Clave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se llenan los datos dinámicamente -->
+          </tbody>
+        </table>
+
       </div>
 
       <!-- Detalle del estudiante -->

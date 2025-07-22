@@ -15,8 +15,11 @@
     <h1 class="text-center text-uppercase text-primary mb-3">Análisis Sensorial de Cacao</h1>
     <h2 class="text-center mb-4">Ficha de Catación</h2>
 
-    <form id="fichaForm" class="card p-4 shadow">
+    <form method="post" action="" id="fichaForm" class="card p-4 shadow">
       
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
       <!-- Datos generales -->
       <div class="row mb-4">
         <div class="col-md-4">
@@ -41,7 +44,7 @@
               <th>Categoría</th>
               <th>Intensidad (0-5)</th>
               <th>Descriptores</th>
-              <th>Calidad (0-10)</th>
+              <th>Calidad <br>(0-10)</th>
               <th>Puntaje</th>
             </tr>
           </thead>
@@ -57,28 +60,28 @@
 <tr class="detalle-acidez">
   <td>Acidez-frutal</td>
   <td>
-    <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+    <input type="range" class="form-range" name="acidez_frutal_intensidad"  min="0" max="5" value="0" oninput="updateSlider(this)">
     <span class="badge bg-secondary">0</span>
   </td>
-  <td><input type="text" name="aroma_desc" class="form-control"></td>
-  <td><input type="number" name="acidez_qual" min="0" max="10" class="form-control"></td>
-  <td><input type="number" name="acidez_score" class="form-control" readonly></td>
+  <td><input type="text" name="acidez_frutal_descripcion" class="form-control"></td>
+  <td><input type="number" name="acidez_frutal_calidad" min="0" max="10" class="form-control"></td>
+  <td><input type="number" name="acidez_frutal_score" class="form-control" readonly></td>
 </tr>
             <tr class="detalle-acidez">
               <td>Acidez-Acetica</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="acidez_acetica_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="acidez_qual" min="0" max="10" class="form-control"></td>
-              <td><input type="number" name="acidez_score" class="form-control" readonly></td>
+              <td><input type="text" name="acidez_acetica_descripcion" class="form-control"></td>
+              <td><input type="number" name="acidez_acetica_calidad" min="0" max="10" class="form-control"></td>
+              <td><input type="number" name="acidez_acetica_score" class="form-control" readonly></td>
             </tr>
 
             <tr class="detalle-acidez">
               <td>Acidez-lactica</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="acidez_lactica_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
               <td><input type="text" name="aroma_desc" class="form-control"></td>
@@ -89,34 +92,34 @@
             <tr class="detalle-acidez">
               <td>Acidez-mineral/butirica</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="acidez_mineral_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="acidez_qual" min="0" max="10" class="form-control"></td>
-              <td><input type="number" name="acidez_score" class="form-control" readonly></td>
+              <td><input type="text" name="acidez_mineral_descripcion" class="form-control"></td>
+              <td><input type="number" name="acidez_mineral_calidad" min="0" max="10" class="form-control"></td>
+              <td><input type="number" name="acidez_mineral_score" class="form-control" readonly></td>
             </tr>
             
 
             <tr class="detalle-amargor">
               <td>Amargor</td>
               <td>
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="amargor_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="amargor_qual" min="0" max="10" class="form-control"></td>
+              <td><input type="text" name="amargor_descripcion" class="form-control"></td>
+              <td><input type="number" name="amargor_calidad" min="0" max="10" class="form-control"></td>
               <td><input type="number" name="amargor_score" class="form-control" readonly></td>
             </tr>
 
             <tr class="detalle-astrigencia">
             <td>Astringencia</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="astringencia_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="astrigencia_qual" min="0" max="10" class="form-control"></td>
+              <td><input type="text" name="astringencia_descripcion" class="form-control"></td>
+              <td><input type="number" name="astringencia_calidad" min="0" max="10" class="form-control"></td>
               <td><input type="number" name="astrigencia_score" class="form-control" readonly></td>
             </tr>
             
@@ -126,23 +129,23 @@
            <tr class="detalle-cacao">
             <td>Cacao</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="cacao_intensidad" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="cacao_qual" min="0" max="10" class="form-control"></td>
+              <td><input type="text" name="cacao_descripcion" class="form-control"></td>
+              <td><input type="number" name="cacao_calidad" min="0" max="10" class="form-control"></td>
               <td><input type="number" name="cacao_score" class="form-control" readonly></td>
             </tr>
 
             <tr class="detalle-dulce">
             <td>Dulce</td>
               <td>
-                <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+                <input type="range" class="form-range" name="dulce_int" min="0" max="5" value="0" oninput="updateSlider(this)">
                 <span class="badge bg-secondary">0</span>
               </td>
-              <td><input type="text" name="aroma_desc" class="form-control"></td>
-              <td><input type="number" name="cacao_qual" min="0" max="10" class="form-control"></td>
-              <td><input type="number" name="cacao_score" class="form-control" readonly></td>
+              <td><input type="text" name="dulce_desc" class="form-control"></td>
+              <td><input type="number" name="dulce_calidad" min="0" max="10" class="form-control"></td>
+              <td><input type="number" name="dulce_score" class="form-control" readonly></td>
             </tr>
       
          <tr class="seccion-nuez">
@@ -153,24 +156,24 @@
             <td>Parte interna</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="nuezinterna_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="interna" class="form-control"></td>
+            <td><input type="number" name="interna" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="interna" class="form-control" readonly></td>
           </tr>
        
             <tr class="detalle-nuez">
             <td>Piel de la Nuez</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="piel_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="piel_desc" class="form-control"></td>
+            <td><input type="number" name="piel_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="piel_score" class="form-control" readonly></td>
           </tr>
        
 
@@ -183,60 +186,60 @@
             <td>fruta-citricos</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="citricos_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="citricos_desc" class="form-control"></td>
+            <td><input type="number" name="citricos_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="citricos_score" class="form-control" readonly></td>
           </tr>
 
           <tr class="detalle-frutas">
             <td>Fruta-bayas</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="bayas_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="bayas_desc" class="form-control"></td>
+            <td><input type="number" name="bayas_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="bayas_score" class="form-control" readonly></td>
           </tr>
 
           <tr class="detalle-frutas">
             <td>Fruta-oscura</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="frutaosc_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="frutaosc_desc" class="form-control"></td>
+            <td><input type="number" name="frutaosc_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="frutaosc_score" class="form-control" readonly></td>
           </tr>
 
           <tr class="detalle-frutas">
             <td>Fruta-pulpa amarilla</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="amarilla_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="amarilla_desc" class="form-control"></td>
+            <td><input type="number" name="amarilla_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="amarilla_score" class="form-control" readonly></td>
           </tr>
 
             <tr class="detalle-frutas">
               <td>Fruta-tropical</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="tropical_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="tropical_desc" class="form-control"></td>
+            <td><input type="number" name="tropical_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="tropical_score" class="form-control" readonly></td>
           </tr>
 
 
@@ -248,36 +251,36 @@
             <td>Fruta-seca</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="seca_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="seca_desc" class="form-control"></td>
+            <td><input type="number" name="seca_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="seca_score" class="form-control" readonly></td>
           </tr>
 
           <tr class="detalle-fruta-marron">
             <td>Fruta-marron</td>
               <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="marron_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="marron_desc" class="form-control"></td>
+            <td><input type="number" name="marron_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="marron_score" class="form-control" readonly></td>
           </tr>
           
             <tr class="detalle-fruta-marron">
               <td>Fruta-sobre madura</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="somadura_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="somadura_desc" class="form-control"></td>
+            <td><input type="number" name="somadura_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="somadura_score" class="form-control" readonly></td>
           </tr>
 
 
@@ -289,12 +292,12 @@
               <td>vegetal-pasto/hierba</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="pasto_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="pasto_desc" class="form-control"></td>
+            <td><input type="number" name="pasto_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="pasto_score" class="form-control" readonly></td>
           </tr>        
 
 
@@ -302,12 +305,12 @@
               <td>vegetal-terroso/hongo/moho</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="terroso_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="terroso_desc" class="form-control"></td>
+            <td><input type="number" name="terroso_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="terroso_score" class="form-control" readonly></td>
           </tr>        
 
           <tr class="seccion-floral">
@@ -318,12 +321,12 @@
               <td>Floral-flor de azahar</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="florazahar_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="florazahar_desc" class="form-control"></td>
+            <td><input type="number" name="florazahar_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="florazahar_score" class="form-control" readonly></td>
           </tr>  
           
           
@@ -331,12 +334,12 @@
               <td>Floral-flores</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="flores_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="flores_desc" class="form-control"></td>
+            <td><input type="number" name="flores_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="flores_score" class="form-control" readonly></td>
           </tr>  
 
           <tr class="seccion-madera">    
@@ -347,36 +350,36 @@
               <td>Madera-clara</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="maclara_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="maclara_desc" class="form-control"></td>
+            <td><input type="number" name="maclara_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="maclara_score" class="form-control" readonly></td>
           </tr>  
 
   <tr class="detalle-madera">
               <td>Madera oscura</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="maoscura_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="maoscura_desc" class="form-control"></td>
+            <td><input type="number" name="maoscura_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="maoscura_score" class="form-control" readonly></td>
           </tr>  
 
   <tr class="detalle-madera">
               <td>Madera-resina</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="resina_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="resina_desc" class="form-control"></td>
+            <td><input type="number" name="resina_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="resina_score" class="form-control" readonly></td>
           </tr>  
 
             
@@ -388,36 +391,36 @@
               <td>Especias-especias</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="especias_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="especias_desc" class="form-control"></td>
+            <td><input type="number" name="especias_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="especias_score" class="form-control" readonly></td>
           </tr>  
 
   <tr class="detalle-especias">
               <td>Especia-tabaco</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="tabaco_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="tabaco_desc" class="form-control"></td>
+            <td><input type="number" name="tabaco_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="tabaco_score" class="form-control" readonly></td>
           </tr>  
           
   <tr class="detalle-especias">
               <td>Especia-sazonado/umami</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="umami_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="umami_desc" class="form-control"></td>
+            <td><input type="number" name="umami_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="umami_score" class="form-control" readonly></td>
           </tr>  
 
 
@@ -430,24 +433,24 @@
               <td>sucio-empolvado</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="empolvado_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="empolvado_desc" class="form-control"></td>
+            <td><input type="number" name="empolvado_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="empolvado_score" class="form-control" readonly></td>
           </tr>  
           
   <tr class="detalle-saboresatipicos">
               <td>Humedad</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="humedad_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="humedad_desc" class="form-control"></td>
+            <td><input type="number" name="humedad_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="humedad_score" class="form-control" readonly></td>
           </tr>  
 
           
@@ -455,12 +458,12 @@
               <td>Mohoso</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="mohoso_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="mohoso_desc" class="form-control"></td>
+            <td><input type="number" name="mohoso_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="mohoso_score" class="form-control" readonly></td>
           </tr>  
 
           
@@ -468,12 +471,12 @@
               <td>carnoso-animal/cuero</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="cuero_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="cuero_desc" class="form-control"></td>
+            <td><input type="number" name="cuero_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="cuero_score" class="form-control" readonly></td>
           </tr>  
 
           
@@ -481,12 +484,12 @@
               <td>Sobre fermentado-fruta podrida</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="frupodrida_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="frupodrida_desc" class="form-control"></td>
+            <td><input type="number" name="frupodrida_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="frupodrida_score" class="form-control" readonly></td>
           </tr>  
 
 
@@ -495,12 +498,12 @@
               <td>podrido-estiercol</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="estiercol_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="estiercol_desc" class="form-control"></td>
+            <td><input type="number" name="estiercol_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="estiercol_score" class="form-control" readonly></td>
           </tr>  
 
           
@@ -508,12 +511,12 @@
               <td>Humo</td>
             <td>
 
-              <input type="range" class="form-range" name="aroma_int" min="0" max="5" value="0" oninput="updateSlider(this)">
+              <input type="range" class="form-range" name="humo_int" min="0" max="5" value="0" oninput="updateSlider(this)">
               <span class="badge bg-secondary">0</span>
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="humo_desc" class="form-control"></td>
+            <td><input type="number" name="humo_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="humo_score" class="form-control" readonly></td>
           </tr>  
 
 
@@ -522,9 +525,9 @@
               <textarea name="aroma_desc" class="form-control" rows="3" placeholder="Otros sabores..."></textarea>
             
             </td>
-            <td><input type="text" name="aroma_desc" class="form-control"></td>
-            <td><input type="number" name="aroma_qual" min="0" max="10" class="form-control"></td>
-            <td><input type="number" name="aroma_score" class="form-control" readonly></td>
+            <td><input type="text" name="otros_desc" class="form-control"></td>
+            <td><input type="number" name="otros_qual" min="0" max="10" class="form-control"></td>
+            <td><input type="number" name="otros_score" class="form-control" readonly></td>
         
           </tbody>
        
